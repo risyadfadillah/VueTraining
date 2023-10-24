@@ -1,11 +1,13 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import Header from './components/atoms/Header.vue'
+import Header from './components/atoms/CustomHeader.vue'
+import MovieCatalogue from './components/organisms/MovieCatalogue.vue';
+import MovieList from './components/organisms/MovieList.vue';
 </script>
 
 <template>
   <Header title="Movie Catalogue"></Header>
+  <MovieCatalogue></MovieCatalogue>
+  <MovieList></MovieList>
   <!-- <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
@@ -14,22 +16,22 @@ import Header from './components/atoms/Header.vue'
     </div>
   </header> -->
 
-  <main>
+  <!-- <main>
     <TheWelcome />
-  </main>
+  </main> -->
 </template>
 
 <style scoped>
-header {
+/* header {
   line-height: 1.5;
 }
 
 .logo {
   display: block;
   margin: 0 auto 2rem;
-}
+} */
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   header {
     display: flex;
     place-items: center;
@@ -45,5 +47,5 @@ header {
     place-items: flex-start;
     flex-wrap: wrap;
   }
-}
+} */
 </style>
