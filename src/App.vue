@@ -1,51 +1,77 @@
-<script setup>
-import Header from './components/atoms/CustomHeader.vue'
+<script>
+import CustomHeader from './components/atoms/CustomHeader.vue'
 import MovieCatalogue from './components/organisms/MovieCatalogue.vue';
-import MovieList from './components/organisms/MovieList.vue';
+import MovieTitle from './components/organisms/MovieTitle.vue';
+import data from '../src/data.json'
+
+export default {
+  components: {
+    CustomHeader, MovieCatalogue, MovieTitle
+  },
+  data() {
+    return {
+      movieData: data,
+      title: "",
+      director: "",
+      casts: "",
+      genre: "",
+      movieImageSrc: ""
+    }
+  },
+  methods: {
+    setCatalogue(data) {
+      this.movieData.forEach((item) => {
+        // console.log("kepencet >>> ", item.title);
+        if (data === item.title) {
+
+          this.title = `${item.title} (${item.year})`
+          this.director = item.director
+          this.casts = item.casts
+          this.genre = item.genre
+          this.movieImageSrc = item.poster
+          console.log("kepencet >>> ", item.title);
+        } 
+      })
+    }
+  }
+}
 </script>
 
 <template>
-  <Header title="Movie Catalogue"></Header>
-  <MovieCatalogue></MovieCatalogue>
-  <MovieList></MovieList>
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  {{ console.log("movieTitle >>> ", title)
+   }}
+  <CustomHeader title="Movie Catalogue"></CustomHeader>
+  <div class="MainContainer">
+    <MovieCatalogue :movieTitle="title" :movieImageSrc="movieImageSrc" :movieDirector="director" :movieCasts="casts" :movieGenre="genre"></MovieCatalogue>
+    <div class="MovieListWrapper">
+      <div v-for="item in movieData" :key="item.title" class="MovieListContainer" >
+        <MovieTitle :movieTitle=item.title 
+        @onClick-Title="e=> setCatalogue(e)"
+        ></MovieTitle>
+      </div>
     </div>
-  </header> -->
-
-  <!-- <main>
-    <TheWelcome />
-  </main> -->
+  </div>
 </template>
 
 <style scoped>
-/* header {
-  line-height: 1.5;
+.MainContainer {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  flex: 1;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-} */
+.MovieListContainer {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  padding-left: 8px;
+  padding-bottom: 4px;
+  padding-top: 8px;
+}
 
-/* @media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-} */
+.MovieListWrapper {
+  flex: 1;
+  background-color: whitesmoke;
+}
 </style>

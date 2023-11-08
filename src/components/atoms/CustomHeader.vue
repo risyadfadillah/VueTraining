@@ -7,8 +7,6 @@ export default {
             type: String
         }
     }
-
-
 }
 </script>
 
@@ -23,7 +21,7 @@ export default {
     color: white;
     font-weight: 900;
     font-size: larger;
-
+    text-align: center;
 }
 
 </style>
